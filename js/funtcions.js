@@ -50,6 +50,9 @@ function load_page(){
         showConfirmButton: false
     });
     document.getElementById("valores").value = array_ejm; 
+    document.getElementById("fecha").value = new Date();
+    let fecha = new Date();
+    document.getElementById("dia").innerText = fecha.getDay();
 }
 
 function send_info(){
@@ -140,4 +143,38 @@ function eliminar(){
 function imp_rever(){
     document.getElementById("text_rever").innerText = array_ejm.reverse();
     document.getElementById("valores").disabled = false;
+}
+
+
+// Función para enviar el nombre concatenado
+function send_name(){
+    let name_one   = document.getElementById("name_one").value;
+    let name_two   = document.getElementById("name_two").value;
+    let search_var = document.getElementById("search_var").value;
+    let name_com = name_one.toUpperCase()+" "+name_two.toUpperCase();
+    // let variable = name_com.indexOf("I");
+    // let variable = name_com.lastIndexOf("I");
+    // let variable = name_com.charAt(3);
+    let variable = name_com.charAt(search_var);
+    
+    if(search_var <= name_com.length && search_var.length != 0){
+        // console.log(variable);
+        // Swal.fire(variable);
+        document.getElementById("print_name").innerText = "La letra correspondiente al #"+search_var+" es: "+variable;
+    }
+    // else if(isNaN(search_var) != false){
+    else if(isNaN(search_var)){
+        Swal.fire({
+            icon: "error",
+            title: "El valor no es un número"
+        });
+        document.getElementById("print_name").innerText = ""; 
+    }
+    else{
+        Swal.fire({
+            icon: "error",
+            title: "No tiene valor o el valor supera la cantidad de letras del texto"
+        });
+        document.getElementById("print_name").innerText = "";
+    }
 }
